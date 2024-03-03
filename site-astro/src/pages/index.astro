@@ -1,11 +1,29 @@
 ---
+import {PostsDocument} from '../gql/graphql'
+import {client} from '../utils/urql'
+
 import Layout from '../layouts/Layout.astro'
+
+const query = await client.query(PostsDocument, {}).toPromise()
+const posts = query.data?.posts?.nodes
 ---
 
 <Layout title="Hello">
   <main>
     <div class="max-w-3xl mx-auto w-full px-10 py-7">
-      <h1 class="text-green-400 text-2xl font-mono">Plushies' Garden</h1>
+      <h1 class="text-green-400 text-3xl font-mono mb-3">Plushies' Garden</h1>
+
+      <div class="text-white flex flex-col gap-y-4">
+        {
+          posts?.map((post) => (
+            <div>
+              <h1 class="text-3xl mb-2">{post.title}</h1>
+              <div set:html={post.content} />
+            </div>
+          ))
+        }
+      </div>
     </div>
   </main>
 </Layout>
+../utils/urql
