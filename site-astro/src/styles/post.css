@@ -1,0 +1,15 @@
+.article-content p,
+.article-content ul,
+.article-content figure {
+  margin-bottom: 1.3em;
+}
+
+.article-content ul {
+  list-style: disc;
+  list-style-position: inside;  
+}
+
+.article-content blockquote {
+  border-left: 4px solid greenyellow;
+  padding: 0.8em 1.5em;
+}

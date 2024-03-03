@@ -1,0 +1,35 @@
+---
+import '../../styles/post.css'
+
+import {urql} from '../../utils/urql'
+import {PostBySlugDocument} from '../../gql/graphql'
+import Layout from '../../layouts/Layout.astro'
+
+const {slug} = Astro.params
+if (!slug) throw new Error('missing slug')
+
+const query = await urql.query(PostBySlugDocument, {slug}).toPromise()
+const post = query.data?.post
+
+export const prerender = false
+---
+
+<Layout title="foo">
+  <main>
+    {
+      post && (
+        <div class="py-5 bg-teal-300 font-mono font-bold text-teal-800 text-center text-4xl">
+          <h1>~~ {post.title} ~~</h1>
+        </div>
+      )
+    }
+
+    <div class="max-w-3xl mx-auto w-full px-10 pt-10 pb-16 font-mono">
+      <div class="text-white flex flex-col gap-y-4">
+        {post && <div class="article-content" set:html={post?.content} />}
+
+        {!post && <div class="text-white">Post not found...</div>}
+      </div>
+    </div>
+  </main>
+</Layout>

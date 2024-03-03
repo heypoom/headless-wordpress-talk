@@ -3,7 +3,14 @@ query Posts {
     nodes {
       id
       title
-      content
+      excerpt
+      slug
+
+      categories {
+        nodes {
+          name
+        }
+      }
     }
   }
 }

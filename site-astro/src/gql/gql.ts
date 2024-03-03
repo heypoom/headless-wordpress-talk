@@ -13,7 +13,8 @@ import type { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-
  * Therefore it is highly recommended to use the babel or swc plugin for production.
  */
 const documents = {
-    "query Posts {\n  posts {\n    nodes {\n      id\n      title\n      content\n    }\n  }\n}": types.PostsDocument,
+    "query PostBySlug($slug: ID!) {\n  post(id: $slug, idType: SLUG) {\n    id\n    content\n    title\n  }\n}": types.PostBySlugDocument,
+    "query Posts {\n  posts {\n    nodes {\n      id\n      title\n      excerpt\n      slug\n      categories {\n        nodes {\n          name\n        }\n      }\n    }\n  }\n}": types.PostsDocument,
 };
 
 /**
@@ -33,7 +34,11 @@ export function graphql(source: string): unknown;
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "query Posts {\n  posts {\n    nodes {\n      id\n      title\n      content\n    }\n  }\n}"): (typeof documents)["query Posts {\n  posts {\n    nodes {\n      id\n      title\n      content\n    }\n  }\n}"];
+export function graphql(source: "query PostBySlug($slug: ID!) {\n  post(id: $slug, idType: SLUG) {\n    id\n    content\n    title\n  }\n}"): (typeof documents)["query PostBySlug($slug: ID!) {\n  post(id: $slug, idType: SLUG) {\n    id\n    content\n    title\n  }\n}"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "query Posts {\n  posts {\n    nodes {\n      id\n      title\n      excerpt\n      slug\n      categories {\n        nodes {\n          name\n        }\n      }\n    }\n  }\n}"): (typeof documents)["query Posts {\n  posts {\n    nodes {\n      id\n      title\n      excerpt\n      slug\n      categories {\n        nodes {\n          name\n        }\n      }\n    }\n  }\n}"];
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};

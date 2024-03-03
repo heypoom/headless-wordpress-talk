@@ -1,0 +1,42 @@
+---
+import {type PostsQuery} from '../gql/graphql'
+
+type Post = NonNullable<PostsQuery['posts']>['nodes'][0]
+
+interface Props {
+  post: Post
+}
+
+const {post} = Astro.props
+
+const categories = post.categories?.nodes.map((category) => category.name) ?? []
+
+const isDeveloper = categories.includes('Developer')
+const isPlushie = categories.includes('Plushie')
+---
+
+<div>
+  <a href={`/post/${post.slug}`}>
+    <div
+      class="px-5 py-4 space-y-2 rounded-sm"
+      class:list={[
+        isDeveloper && 'bg-green-400 text-gray-900 hover:bg-green-300',
+        isPlushie && 'bg-rose-400 text-gray-900 hover:bg-rose-300',
+      ]}
+    >
+      <h1 class="text-xl">{post.title}</h1>
+
+      <div set:html={post.excerpt} />
+
+      <div>
+        {
+          categories?.map((category) => (
+            <div class="inline-flex pr-2 rounded-md text-sm lowercase">
+              #{category}
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </a>
+</div>
