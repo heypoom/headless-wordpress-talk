@@ -1,7 +1,9 @@
 ---
+import type {GetStaticPaths} from 'astro'
 import '../../styles/post.css'
 
 import {urql} from '../../utils/urql'
+import {getPostSlugs} from '../../utils/get-post-slugs'
 import {PostBySlugDocument} from '../../gql/graphql'
 import Layout from '../../layouts/Layout.astro'
 
@@ -12,6 +14,13 @@ const query = await urql.query(PostBySlugDocument, {slug}).toPromise()
 const post = query.data?.post
 
 export const prerender = false
+
+// ! demo for pre-rendering.
+// export const getStaticPaths = (async () => {
+//   const slugs = await getPostSlugs()
+
+//   return slugs.map((slug) => ({params: {slug}}))
+// }) satisfies GetStaticPaths
 ---
 
 <Layout title="foo">
