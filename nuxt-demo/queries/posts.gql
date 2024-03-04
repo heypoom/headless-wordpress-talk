@@ -1,0 +1,16 @@
+query Posts {
+  posts {
+    nodes {
+      id
+      title
+      excerpt
+      slug
+
+      categories {
+        nodes {
+          name
+        }
+      }
+    }
+  }
+}
