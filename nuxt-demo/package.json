@@ -7,13 +7,22 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "codegen": "graphql-codegen"
   },
   "dependencies": {
     "@graphql-codegen/cli": "^5.0.2",
+    "@graphql-codegen/client-preset": "^4.2.4",
+    "@graphql-typed-document-node/core": "^3.2.0",
     "@nuxtjs/tailwindcss": "^6.11.4",
+    "@parcel/watcher": "^2.4.1",
+    "@urql/core": "^4.3.0",
+    "@urql/vue": "^1.1.2",
+    "graphql": "^16.8.1",
     "nuxt": "^3.10.3",
     "tailwindcss": "^3.4.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.3",
     "vue": "^3.4.19",
     "vue-router": "^4.3.0"
   }
