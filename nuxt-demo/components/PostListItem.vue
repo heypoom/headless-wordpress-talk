@@ -15,7 +15,7 @@ const isPlushie = categories.includes('Plushie')
 
 <template>
   <div>
-    <a :href="`/post/${post.slug}`">
+    <NuxtLink :to="`/post/${post.slug}`">
       <div
         class="px-5 py-4 space-y-2 rounded-sm"
         :class="{
@@ -32,6 +32,6 @@ const isPlushie = categories.includes('Plushie')
           </div>
         </div>
       </div>
-    </a>
+    </NuxtLink>
   </div>
 </template>
